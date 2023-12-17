@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,6 +49,11 @@ public class User implements UserDetails {
   @Email(message = "Email should be valid")
   private String email;
 
+  @Column(name = "age")
+  @Min(value = 0, message = "Возраст не может быть меньше 0 лет!")
+  @Max(value = 127, message = "Возраст не может быть больше 127 лет!")
+  private byte age;
+
   @Column(name = "password")
   @NotEmpty(message = "Password is not empty")
   private String password;
@@ -62,13 +69,14 @@ public class User implements UserDetails {
   )
   private List<Role> roleList;
 
-  public User(int id, String username, String name, String lastName, String email, String password,
+  public User(int id, String username, String name, String lastName, String email, byte age, String password,
       List<Role> roleList) {
     this.id = id;
     this.username = username;
     this.name = name;
     this.lastName = lastName;
     this.email = email;
+    this.age = age;
     this.password = password;
     this.roleList = roleList;
   }
@@ -153,5 +161,13 @@ public class User implements UserDetails {
 
   public void setRoleList(List<Role> roleList) {
     this.roleList = roleList;
+  }
+
+  public byte getAge() {
+    return age;
+  }
+
+  public void setAge(byte age) {
+    this.age = age;
   }
 }
