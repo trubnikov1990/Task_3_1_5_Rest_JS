@@ -20,7 +20,6 @@ public class Role implements GrantedAuthority {
   @Column(name = "status")
   private String status;
 
-  // empty constructor
   public Role() {
   }
 
