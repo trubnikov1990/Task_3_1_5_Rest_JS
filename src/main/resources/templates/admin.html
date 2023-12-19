@@ -52,6 +52,7 @@
 
       <!-------------------------------------------------------------------------------------------------->
       <!--Admin and user сбоку панель-->
+      <div class="d-flex align-items-start">
       <div class="col-2">
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
@@ -206,28 +207,16 @@
                                   </div>
 
                                   <div class="mb-3">
-                                    <label class="container-fluid" for="rolesUpdate">Role</label>
-                                    <select class="form-control form-control-sm" id="rolesUpdate" name="roles" multiple
-                                            th:value="${user.roleList}" style="height: 50px; width: 300px; margin: 0 auto">
-                                      <option th:each="role : ${allRoles}"
-                                              th:value="${role.status}"
-                                              th:text="${role.status}">
-                                      </option>
-                                    </select>
+                                    <label class="container-fluid ">
+                                      <select th:field="*{roleList}" multiple="multiple" required>
+                                        <option th:each="role : ${allRoles}"
+                                                th:value="${role.id}"
+                                                th:text="${role.status}">
+                                        </option>
+                                      </select>
+                                    </label>
                                   </div>
-
-<!--                                  <div class="mb-3">-->
-<!--                                    <label class="container-fluid "-->
-<!--                                           for="rolesUpdate">Role</label>-->
-<!--                                    <select class="form-control form-control-sm"-->
-<!--                                            id="rolesUpdate" name="roles" multiple-->
-<!--                                            th:value="${user.roleList}"-->
-<!--                                            style="height: 50px; width: 300px; margin: 0 auto">-->
-<!--                                      <option value="ROLE_USER">USER</option>-->
-<!--                                      <option selected="selected" value="ROLE_ADMIN">ADMIN</option>-->
-<!--                                    </select>-->
-<!--                                  </div>-->
-<!--                                </div>-->
+                                </div>
 
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary"
