@@ -52,7 +52,7 @@ public class User implements UserDetails {
   @Column(name = "age")
   @Min(value = 0, message = "Возраст не может быть меньше 0 лет!")
   @Max(value = 127, message = "Возраст не может быть больше 127 лет!")
-  private byte age;
+  private int age;
 
   @Column(name = "password")
   @NotEmpty(message = "Password is not empty")
@@ -69,7 +69,8 @@ public class User implements UserDetails {
   )
   private List<Role> roleList;
 
-  public User(int id, String username, String name, String lastName, String email, byte age, String password,
+  public User(int id, String username, String name, String lastName, String email, int age,
+      String password,
       List<Role> roleList) {
     this.id = id;
     this.username = username;
@@ -163,11 +164,24 @@ public class User implements UserDetails {
     this.roleList = roleList;
   }
 
-  public byte getAge() {
+  public int getAge() {
     return age;
   }
 
-  public void setAge(byte age) {
+  public void setAge(int age) {
     this.age = age;
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", email='" + email + '\'' +
+        ", age=" + age +
+        ", password='" + password + '\'' +
+        ", roleList=" + roleList +
+        '}';
   }
 }
