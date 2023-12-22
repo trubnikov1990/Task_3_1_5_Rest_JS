@@ -174,11 +174,11 @@
                                   <div class="mb-3">
                                     <label for="ageUpdate"
                                            class="col-form-label">age</label>
-                                    <input type="text"
+                                    <input class="form-control" type="number" step="1" min="0"
+                                           required minlength="1" maxlength="120"
                                            th:value="${user.age}" name="age"
-                                           class="form-control" id="ageUpdate"/>
+                                            id="ageUpdate"/>
                                   </div>
-
                                   <div class="mb-3">
                                     <label for="emailUpdate"
                                            class="col-form-label">email</label>
@@ -338,11 +338,8 @@
                       <br>
                       <label class="font-weight-bold" for="ageNew">age</label>
                       <br>
-                      <input class="form-control" type="text" step="1" min="0" required minlength="1"
-                             maxlength="120" name="age"
-                             id="ageNew"
-                             style="height: 30px; width: 300px; margin: 0 auto"
-                             placeholder="age"/>
+                      <input class="form-control" type="number" step="1" min="0" required minlength="1" maxlength="120" name="age"
+                             id="ageNew" style="height: 30px; width: 300px; margin: 0 auto" placeholder="Age" />
                       <br>
                       <label class="font-weight-bold" for="emailNew">email</label>
                       <br>
