@@ -139,8 +139,8 @@
                                 <button type="button" class="btn-close"
                                         data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <form th:method="POST"
-                                    th:action="@{/admin/edit?id={id}(id=${user.id})}"
+                              <form th:method="PATCH"
+                                    th:action="@{/admin/{id}(id=${user.id})}"
                                     th:object="${user}">
 
                                 <div class="mb-3">
@@ -176,8 +176,7 @@
                                            class="col-form-label">age</label>
                                     <input type="text"
                                            th:value="${user.age}" name="age"
-                                           class="form-control" id="ageUpdate"
-                                           required minlength="2" maxlength="20"/>
+                                           class="form-control" id="ageUpdate"/>
                                   </div>
 
                                   <div class="mb-3">
@@ -239,8 +238,8 @@
                                 <button type="button" class="btn-close"
                                         data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <form th:method="POST"
-                                    th:action="@{/admin/delete?id={id}(id=${user.id})}">
+                              <form th:method="DELETE"
+                                    th:action="@{/admin/{id}(id=${user.id})}">
                                 <div class="modal-body">
                                   <div class="mb-3">
                                     <label for="usernameDelete"

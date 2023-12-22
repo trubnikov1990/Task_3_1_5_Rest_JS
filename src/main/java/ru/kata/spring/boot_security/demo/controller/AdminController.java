@@ -40,14 +40,14 @@ public class AdminController {
     return "redirect:/admin";
   }
 
-  @PostMapping("/edit")
-  public String update(@ModelAttribute("user") User user, @RequestParam(value = "id") int id) {
+  @PatchMapping("/{id}")
+  public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
     userService.updateUser(id, user);
     return "redirect:/admin";
   }
 
-  @PostMapping("/delete")
-  public String deleteUser(@RequestParam(value = "id") int id) {
+  @DeleteMapping("/{id}")
+  public String deleteUser(@PathVariable("id") int id) {
     userService.deleteUser(id);
     return "redirect:/admin";
   }
