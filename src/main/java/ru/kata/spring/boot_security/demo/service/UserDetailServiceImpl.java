@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,27 +11,21 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 @Service
-public class UserSecurityService implements UserDetailsService {
-
+public class UserDetailServiceImpl implements UserDetailsService {
   private final UserRepository userRepository;
 
   @Autowired
-  public UserSecurityService(UserRepository userRepository) {
+  public UserDetailServiceImpl(UserRepository userRepository) {
     this.userRepository = userRepository;
-  }
-
-  public User findByName(String username) {
-    return userRepository.findByUsername(username);
   }
 
   @Override
   @Transactional
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = findByName(username);
-    if (user == null) {
-      throw new UsernameNotFoundException("User not found");
+  public UserDetails loadUserByUsername(String username_from_webpage) throws UsernameNotFoundException {
+    Optional<User> user_from_DB = userRepository.findByUsername(username_from_webpage); //Ищем в БД юзера по имени с формы
+    if (user_from_DB.isEmpty()) {
+      throw new UsernameNotFoundException("Пользователь с таким именем не найден.");
     }
-    return new org.springframework.security.core.userdetails.User(user.getUsername(),
-        user.getPassword(), user.getAuthorities());
+    return user_from_DB.get();
   }
 }

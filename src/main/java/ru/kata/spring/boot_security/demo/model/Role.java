@@ -1,68 +1,51 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-  @Column(name = "status")
-  private String status;
+  private Long id;
+
+  @Column(name = "role")
+  private String name;
 
   public Role() {
   }
+  public Role(String name) {
+    this.name = name;
+  }
 
-  @ManyToMany(mappedBy = "roleList")
-  private List<User> userList;
+  public Long getId() {
+    return id;
+  }
 
-  public Role(int id, String status, List<User> userList) {
-    this.id = id;
-    this.status = status;
-    this.userList = userList;
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
   public String getAuthority() {
-    return status;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public List<User> getUserList() {
-    return userList;
-  }
-
-  public void setUserList(List<User> userList) {
-    this.userList = userList;
+    return getName();
   }
 
   @Override
   public String toString() {
-    return status;
+    return name.replace("ROLE_", "");
   }
 }
