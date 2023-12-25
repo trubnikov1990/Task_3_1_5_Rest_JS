@@ -22,8 +22,7 @@ public class RestUserController {
 
   @GetMapping("/showAccount")
   public ResponseEntity<User> showUserAccount(Principal principal) {
-    User user = userService.findByUsername(principal.getName());
-    return new ResponseEntity<>(user, HttpStatus.OK);
+    return new ResponseEntity<>(userService.findByUsername(principal.getName()), HttpStatus.OK);
   }
 }
 
