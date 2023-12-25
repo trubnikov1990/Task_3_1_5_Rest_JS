@@ -44,7 +44,7 @@ public class RestAdminController {
     return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
   }
 
-  @GetMapping(value = "/roles")
+  @GetMapping("/roles")
   public ResponseEntity<Collection<Role>> getAllRoles() {
     return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);
   }
