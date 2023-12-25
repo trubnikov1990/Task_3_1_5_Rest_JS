@@ -3,10 +3,8 @@ package ru.kata.spring.boot_security.demo.model;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,14 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -34,14 +30,20 @@ public class User implements UserDetails {
 
 
   @Column(name = "username")
+  @NotEmpty(message = "Name is not empty")
+  @Size(min = 2, max = 100, message = "Name should be from 2 to 100 characters")
   private String username;
 
 
   @Column(name = "lastname")
+  @NotEmpty(message = "lastname is not empty")
+  @Size(min = 2, max = 255, message = "lastname should be from 2 to 100 characters")
   private String lastname;
 
-  @Min(14)
+
   @Column(name = "age")
+  @Min(value = 0, message = "Возраст не может быть меньше 0 лет!")
+  @Max(value = 127, message = "Возраст не может быть больше 127 лет!")
   private Byte age;
 
   @Email
@@ -49,6 +51,7 @@ public class User implements UserDetails {
   private String email;
 
   @Column(name = "password")
+  @NotEmpty(message = "Password is not empty")
   private String password;
 
   @ManyToMany
