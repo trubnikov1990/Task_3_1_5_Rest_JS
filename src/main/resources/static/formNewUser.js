@@ -1,18 +1,17 @@
-let formNew = document.forms["formNew"];
+let formNewUser = document.forms["formNewUser"];
 
 createNewUser();
 
 function createNewUser() {
-    formNew.addEventListener("submit", ev => {
+    formNewUser.addEventListener("submit", ev => {
         ev.preventDefault();
 
-        //приводим роли к виду java для отправки в БД
         let rolesForNewUser = [];
-        for (let i = 0; i < formNew.roles.options.length; i++) {
-            if (formNew.roles.options[i].selected)
+        for (let i = 0; i < formNewUser.roles.options.length; i++) {
+            if (formNewUser.roles.options[i].selected)
                 rolesForNewUser.push({
-                    id: formNew.roles.options[i].value,
-                    role: "ROLE_" + formNew.roles.options[i].text
+                    id: formNewUser.roles.options[i].value,
+                    role: "ROLE_" + formNewUser.roles.options[i].text
                 });
         }
 
@@ -22,15 +21,15 @@ function createNewUser() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: formNew.username.value,
-                surname: formNew.lastname.value,
-                age: formNew.age.value,
-                email: formNew.email.value,
-                password: formNew.password.value,
+                username: formNewUser.username.value,
+                lastname: formNewUser.lastname.value,
+                age: formNewUser.age.value,
+                email: formNewUser.email.value,
+                password: formNewUser.password.value,
                 roles: rolesForNewUser
             })
         }).then(() => {
-            formNew.reset();
+            formNewUser.reset();
             getAllUsers();
             $('#usersTable').click(); //клик по кнопке Users Table
 

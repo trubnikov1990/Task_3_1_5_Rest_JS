@@ -12,7 +12,6 @@ function editUser() {
     formEdit.addEventListener("submit", ev => {
         ev.preventDefault();
 
-        //Приведение ролей из вида js к виду java
         let rolesForEdit = [];
         for (let i = 0; i < formEdit.roles.options.length; i++) {
             if (formEdit.roles.options[i].selected) rolesForEdit.push({
@@ -29,7 +28,7 @@ function editUser() {
             body: JSON.stringify({
                 id: formEdit.id.value,
                 username: formEdit.username.value,
-                surname: formEdit.lastname.value,
+                lastname: formEdit.lastname.value,
                 age: formEdit.age.value,
                 email: formEdit.email.value,
                 password: formEdit.password.value,
