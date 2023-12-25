@@ -56,26 +56,25 @@ public class RestAdminController {
 
   @GetMapping("/users/{id}")
   public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
-    User user = userService.findUserById(id);
-    return new ResponseEntity<>(user, HttpStatus.OK);
+    return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
   }
 
   @PostMapping("/users")
-  public ResponseEntity<User> addNewUser(@RequestBody @Valid User newUser, BindingResult bindingResult) {
+  public ResponseEntity<User> addNewUser(@RequestBody @Valid User newUser) {
     userService.saveUser(newUser);
     return new ResponseEntity<>(newUser, HttpStatus.OK);
 
   }
 
   @PatchMapping("/users/{id}")
-  public ResponseEntity<User> updateUser(@RequestBody User userFromWebPage, @PathVariable("id") Long id) {
+  public ResponseEntity<User> updateUser(@RequestBody User userFromWebPage) {
     userService.update(userFromWebPage);
     return new ResponseEntity<>(userFromWebPage, HttpStatus.OK);
   }
 
   @DeleteMapping("/users/{id}")
   public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
-    User user = userService.findUserById(id);
+    userService.findUserById(id);
     userService.deleteUserById(id);
     return new ResponseEntity<>(HttpStatus.OK);
   }
